@@ -1,10 +1,16 @@
 import re
 import os
+
+"""
+gets stops followed by stressed vowels in utterance initial or utterance second non function words (second only if first word is function word)
+writes labels, timing information, word label, syllables per second, filename, and speaker info to tab-separated file
+"""
+
 SAM = 16000
 
 stress={}
 
-with open("/Users/elias/Desktop/IPhODv2/IPhOD2_Words.txt") as f2:
+with open("/YOURPATH/IPhOD2_Words.txt") as f2: #YOUR PATH HERE
 	lines = f2.readlines()
 for l in lines:
 	pattern = ""
@@ -92,7 +98,7 @@ def getLastPhoneme(phnlines, wordEnd):
 
 def getAge(SID):
 	age = 0
-	with open("/Users/elias/Desktop/timit/doc/spkrinfo.txt") as f4:
+	with open("/YOURPATH/timit/doc/spkrinfo.txt") as f4: #YOUR PATH HERE
 		lines = f4.readlines()
 	for l in lines:
 		line = re.split("\\s", l)
@@ -200,7 +206,7 @@ def getInfo(wordStuff, startLine, nextLine, vowelLine, phnlines, line, rootname,
 
 	return("%s,%s,%s,%s,%f,%f,%s,%f,%f,%s,%f,%f,%d,%f,%d,%s,%s,%s,%s,%s,%s,%s,%s,%s"%(CClosure, toPrintCStart, toPrintCEnd, C, Cstart, Cend, V, Vstart, Vend, word, wordStart, wordEnd, sylCount, syllables[0], len(wrdlines), filename, SID, position,prevWordType, prevWord, last, sex, toPrintAge,dialectRegion )) #include speaker info and previous word info
 
-with open("/Users/elias/Desktop/CelexParsing/englishWords.txt") as f3:
+with open("/YOURPATH/englishWords.txt") as f3: #YOUR PATH HERE
 		excludelines = f3.readlines()
 
 
@@ -371,10 +377,10 @@ def parseTimit(rootname):
 	return(firstLine, secondLine)
 
 
-with open("/Users/elias/Desktop/timitOutput.txt" , "w") as f3:
+with open("/YOURPATH/timitOutput.txt" , "w") as f3: #YOUR PATH HERE
 	#all the files in the directory
 	fileRegex = ".*\.wrd"
-	for directory in os.walk("/Users/elias/Desktop/timit", topdown=True):
+	for directory in os.walk("/YOURPATH/timit", topdown=True): #YOUR PATH HERE
 		
 		for filename in directory[2]:
 			
